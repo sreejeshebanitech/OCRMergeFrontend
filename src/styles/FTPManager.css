@@ -1,0 +1,124 @@
+/* FTPManager.css */
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+.login-form {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn {
+  font-weight: bold;
+}
+
+.login-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #e68900;
+}
+
+.ftp-manager {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upload-box {
+  background: #f3f3f3;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.upload-box input {
+  margin-bottom: 10px;
+}
+
+.upload-box button {
+  background: #ff5722;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-box button:hover {
+  background: #e64a19;
+}
+
+.file-list {
+  margin-top: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: transform 0.2s;
+}
+
+.file-item:hover {
+  transform: scale(1.03);
+}
+
+.empty-message {
+  color: #333;
+  font-style: italic;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

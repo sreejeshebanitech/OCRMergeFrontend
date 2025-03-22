@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/upload.css";
 
@@ -10,6 +11,29 @@ function FileUpload() {
     english2: null,
   });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+
+    const verifyToken = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/api/upload/verify", { token });
+        if (response.status !== 200 || response.data.message !== "Token is valid") {
+          localStorage.removeItem("token");
+          navigate("/");
+        }
+      } catch (error) {
+        localStorage.removeItem("token");
+        navigate("/");
+      }
+    };
+    verifyToken();
+  }, [navigate]);
 
   const handleFileChange = (event) => {
     const { name, files } = event.target;
@@ -36,8 +60,9 @@ function FileUpload() {
     if (files.english2) formData.append("english2", files.english2);
 
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post("http://localhost:5000/api/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${token}` },
       });
 
       if (response.data && response.data.pdfUrl) {
@@ -69,22 +94,11 @@ function FileUpload() {
             <h3>Math Files</h3>
             <div className="file-input-group">
               <label>Math File 1 (Required):</label>
-              <input
-                type="file"
-                name="math1"
-                accept=".pdf"
-                onChange={handleFileChange}
-                required
-              />
+              <input type="file" name="math1" accept=".pdf" onChange={handleFileChange} required />
             </div>
             <div className="file-input-group optional">
               <label>Math File 2 (Optional):</label>
-              <input
-                type="file"
-                name="math2"
-                accept=".pdf"
-                onChange={handleFileChange}
-              />
+              <input type="file" name="math2" accept=".pdf" onChange={handleFileChange} />
             </div>
           </div>
 
@@ -92,22 +106,11 @@ function FileUpload() {
             <h3>English Files</h3>
             <div className="file-input-group">
               <label>English File 1 (Required):</label>
-              <input
-                type="file"
-                name="english1"
-                accept=".pdf"
-                onChange={handleFileChange}
-                required
-              />
+              <input type="file" name="english1" accept=".pdf" onChange={handleFileChange} required />
             </div>
             <div className="file-input-group optional">
               <label>English File 2 (Optional):</label>
-              <input
-                type="file"
-                name="english2"
-                accept=".pdf"
-                onChange={handleFileChange}
-              />
+              <input type="file" name="english2" accept=".pdf" onChange={handleFileChange} />
             </div>
           </div>
         </div>
